@@ -38,30 +38,19 @@ class SpaceAdventure {
   }
 
   void travel(bool randomDestination) {
+    Planet planet = Planet.nullPlanet();
     if (randomDestination) {
-      travelToPlanet(planetarySystem.randomPlanet());
+      planet = planetarySystem.randomPlanet();
     } else {
-      travelTo(responseToPrompt('Name the planet you would like to visit.'));
+      planet = planetarySystem.planetWithName(responseToPrompt('Name the planet you would like to visit.'));
     }
-  }
-
-  void printIfMatch(Planet planet, String destination) {
-    if (planet.name == destination) {
-      print('Arrived at ${planet.name}. ${planet.description}');
-    }
+    travelTo(planet);
   }
 
   // does not support function overloading
-  void travelToPlanet(Planet planet) {
-    print('Traveling to ${planet.name}');
+  void travelTo(Planet planet) {
+    print('Traveling to ${planet.name}...');
     print('Arrived at ${planet.name}. ${planet.description}');
-  }
-
-  void travelTo(String destination) {
-    print('Traveling to $destination...');
-    planetarySystem.planets.forEach( (planet) {
-      printIfMatch(planet, destination);
-    });
   }
 
   bool promptForRandomOrSpecificDestination(String prompt) {
