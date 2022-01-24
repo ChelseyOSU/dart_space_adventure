@@ -17,12 +17,7 @@ void main(List<String> arguments) {
 }
 
 List<Planet> mockPlanets() {
-  List<Planet> planets = [];
-  planetData.forEach((key, value) {
-    var name = key;
-    var description = value;
-    var planet = Planet(name: name, description: description);
-    planets.add(planet);
-  });
-  return planets;
+  return planetData.entries.map(
+    (entry) => Planet(name: entry.key, description: entry.value)
+  ).toList();
 }
